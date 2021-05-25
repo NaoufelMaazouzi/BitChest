@@ -15,16 +15,18 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id'); // clé primaire
+            $table->unsignedInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('name', 100); // VARCHAR 100
             $table->text('description')->nullable(); // TEXT NULL
             $table->float('price', 8, 2); // FLOAT 
-            $table->char('size', 2);
+            $table->enum('size', ['XS', 'S', 'M', 'L', 'XL'])->default('M');
             $table->enum('status', ['published', 'unpublished'])->default('unpublished');
             $table->enum('state', ['solde', 'standard'])->default('standard');
             $table->string('reference', 16);
-            $table->enum('category', ['homme', 'femme'])->default('homme');
             $table->timestamps();
         });
+
     }
 
     /**
