@@ -23,12 +23,26 @@ class FrontController extends Controller
         return view('front.index', ['products' => $products]);
     }
 
-    // public function show(int $id){
+    public function showProductSoldes(){
+        $products = Product::solde()->paginate(6); // pagination 
 
-    //     $book = Book::find($id);
+        return view('front.index', ['products' => $products]);
+    }
+
+    public function showProductByCategory(int $id){
+        // on récupère le modèle category.id 
+        $category = Category::find($id);
+        $products = $category->products()->paginate(6);
+
+        return view('front.index', ['products' => $products, 'category' => $category]);
+    }
+
+    public function show(int $id){
+
+        $product = Product::find($id);
         
-    //     return view('front.show', ['book' => $book]);
-    // }
+        return view('front.show', ['product' => $product]);
+    }
 
     // public function showBookByAuthor(int $id){
 

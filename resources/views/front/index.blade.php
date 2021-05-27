@@ -2,25 +2,27 @@
 
 @section('content')
 
-<h1>{{$products->total()}} résultats</h1>
- <div class="row">
+<h1 class="resultTitle">{{$products->total()}} résultats</h1>
+
+<div class="row">
     @forelse($products as $product)
-                <div class="col-xs-4" style="max-height:400px,min-height:400px">
-                    <!-- <a href="#" class="thumbnail">
-                        <img width="171" src="{{asset('images/'.$product->picture->link)}}" alt="{{$product->picture->title}}">
-                    </a> -->
-                    <figure class="thumbnail">
-                        <a href="{{url('product', $product->id)}}">
-                            <img width="171" src="{{asset('images/'.$product->category->name.'/'.$product->picture->link)}}" class="figure-img img-fluid rounded" alt="product->name">
-                            <figcaption class="figure-caption">{{$product->name}}</figcaption>
-                        </a>
-                    </figure>
-                </div>
+    <div class="col-sm-4">
+        <div class="card" style="text-align: center">
+            <a href="{{url('product', $product->id)}}">
+                <img src="{{url('images/', $product->picture->link)}}" width="400" height="550" class="card-img-top" alt="$product->name">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">{{$product->name}}</h5>
+                <p class="card-text">{{$product->description}}</p>
+            </div>
+        </div>
+    </div>
     @empty
-        <li>Désolé pour l'instant aucun produit n'est publié sur le site</li>
+        <h2>Désolé pour l'instant aucun produit n'est publié sur le site</h2>
     @endforelse
 </div>
-{{$products->links()}}
-
+<div class="pagination">
+    {{$products->links()}}
+</div>
 @endsection
 

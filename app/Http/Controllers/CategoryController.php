@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    protected $paginate = 15;
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +15,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::paginate($this->paginate);
+
+        return view('back.categories.index', ['categories' => $categories]);
     }
 
     /**
@@ -55,9 +58,11 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        $category = Category::find($id);
+
+        return view('back.categories.edit', ['category' => $category]);
     }
 
     /**
@@ -67,9 +72,53 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required'
+        ]);
+
+        $category = Category::find($id); // associé les fillables
+        // $category->update($request->all());
+        if (isset($request->name)) {
+                $category->update([
+                    'name' => $request->name,
+                ]);
+            }
+        
+        // // on utilisera la méthode sync pour mettre à jour les tailles dans la table de liaison
+        // $category->sizes()->sync($request->sizes);
+
+        // // on check si l'utilisateur entre un nom d'image et on utiliser la méthode update pour mettre à jour le titre de l'image dans la table de liaison
+        // if (isset($request->name_image)) {
+        //     $category->picture()->update([
+        //         'title' => $request->name_image,
+        //     ]);
+        // }
+        
+        // // image
+        // $im = $request->file('picture');
+        
+        // // si on associe une image à un produit 
+        // if (!empty($im)) {
+
+        //     $link = $request->file('picture')->store('images');
+        //     $newLink = str_replace(['Homme', 'Femme'], '', $link);
+        //     // suppression de l'image si elle existe 
+        //     if(!empty($category->picture)){
+        //         Storage::disk('local')->delete($category->picture->link); // supprimer physiquement l'image
+        //         $category->picture()->delete(); // supprimer l'information en base de données
+        //     }
+
+        //     // mettre à jour la table picture pour le lien vers l'image dans la base de données
+        //     $category->picture()->create([
+        //         'link' => $newLink,
+        //         'title' => $request->new_name_image?? $request->new_name_image
+        //     ]);
+            
+        // }
+
+        return redirect()->route('categories.index')->with('message', 'success');
     }
 
     /**

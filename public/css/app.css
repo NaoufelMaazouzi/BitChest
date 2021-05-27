@@ -5789,6 +5789,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 .navbar-inverse {
   background-color: #222;
   border-color: #090909;
+  min-height: 5vh;
 }
 
 .navbar-inverse .navbar-brand {
@@ -8086,6 +8087,56 @@ button.close {
 .visible-lg {
   display: none !important;
 }
+
+.resultTitle {
+  text-align: right
+}
+
+.card-title {
+  font-size: 20px;
+}
+
+.row {
+  width: 101%;
+}
+
+.footer {
+  background-color: #101010;
+  position: sticky;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 23.5vh;
+}
+
+.divContent {
+  min-height: 66vh;
+}
+
+.text-reset {
+  text-decoration: none;
+  color: white;
+}
+
+.fab, .fas {
+  color: #2AB9D7;
+}
+
+.test {
+  background-color: red;
+}
+
+.select {
+  margin-bottom: 20px;
+}
+
+.newBtn {
+  margin-left: 85%;
+}
+
+/* .pagination {
+ float: right
+} */
 
 .visible-xs-block,
 .visible-xs-inline,
