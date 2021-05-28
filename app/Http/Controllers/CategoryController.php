@@ -15,6 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        // On récupère les catégories et on les envoient vers le front
         $categories = Category::paginate($this->paginate);
 
         return view('back.categories.index', ['categories' => $categories]);
@@ -27,7 +28,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        //On envoie l'utilisateur vers la vue création de catégorie
+        return view('back.categories.create');
     }
 
     /**
@@ -38,7 +40,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // On check si les données de la requête valide le schéma de données
+        $this->validate($request, [
+            'name' => 'required|string',
+        ]);
+
+        $category = Category::create($request->all()); // On crée la catégorie avec les données de la requête
+
+        // Quand la catégorie est crée on renvoie l'utilisateur vers la vue qui liste les catégories
+        return redirect()->route('categories.index')->with('message', 'success');
     }
 
     /**
@@ -60,8 +70,10 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        //On cherche la catégorie que l'utilisateur veut modifier
         $category = Category::find($id);
 
+        //On renvoie cette catégorie et l'utilisateur vers la vue de modification de catégories
         return view('back.categories.edit', ['category' => $category]);
     }
 
@@ -74,50 +86,22 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // On check si les données de la requête valide le schéma de données
         $this->validate($request, [
             'name' => 'required'
         ]);
 
-        $category = Category::find($id); // associé les fillables
-        // $category->update($request->all());
+        //On cherche la catégorie que l'utilisateur veut modifier
+        $category = Category::find($id);
+
+        //On met a jour le nom de l'image avec le nouveau nom qu'a entré l'utlisateur
         if (isset($request->name)) {
                 $category->update([
                     'name' => $request->name,
                 ]);
             }
-        
-        // // on utilisera la méthode sync pour mettre à jour les tailles dans la table de liaison
-        // $category->sizes()->sync($request->sizes);
 
-        // // on check si l'utilisateur entre un nom d'image et on utiliser la méthode update pour mettre à jour le titre de l'image dans la table de liaison
-        // if (isset($request->name_image)) {
-        //     $category->picture()->update([
-        //         'title' => $request->name_image,
-        //     ]);
-        // }
-        
-        // // image
-        // $im = $request->file('picture');
-        
-        // // si on associe une image à un produit 
-        // if (!empty($im)) {
-
-        //     $link = $request->file('picture')->store('images');
-        //     $newLink = str_replace(['Homme', 'Femme'], '', $link);
-        //     // suppression de l'image si elle existe 
-        //     if(!empty($category->picture)){
-        //         Storage::disk('local')->delete($category->picture->link); // supprimer physiquement l'image
-        //         $category->picture()->delete(); // supprimer l'information en base de données
-        //     }
-
-        //     // mettre à jour la table picture pour le lien vers l'image dans la base de données
-        //     $category->picture()->create([
-        //         'link' => $newLink,
-        //         'title' => $request->new_name_image?? $request->new_name_image
-        //     ]);
-            
-        // }
-
+        // Quand la catégorie est modifiée on renvoie l'utilisateur vers la vue qui liste les catégories
         return redirect()->route('categories.index')->with('message', 'success');
     }
 
@@ -127,8 +111,15 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        //On cherche la catégorie que l'utilisateur veut modifier
+        $category = Category::find($id);
+
+        //On supprime la catégorie en question
+        $category->delete();
+
+        // Quand la catégorie est supprimée on renvoie l'utilisateur vers la vue qui liste les catégories
+        return redirect()->route('categories.index')->with('message', 'success delete');
     }
 }

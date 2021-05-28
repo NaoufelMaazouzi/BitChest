@@ -18,14 +18,13 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('name', 100); // VARCHAR 100
-            $table->text('description')->nullable(); // TEXT NULL
+            $table->text('description'); // TEXT 
             $table->float('price', 8, 2); // FLOAT 
             $table->enum('status', ['published', 'unpublished'])->default('unpublished');
             $table->enum('state', ['solde', 'standard'])->default('standard');
             $table->string('reference', 16);
             $table->timestamps();
         });
-
     }
 
     /**

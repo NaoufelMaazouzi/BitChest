@@ -43,21 +43,5 @@ class FrontController extends Controller
         
         return view('front.show', ['product' => $product]);
     }
-
-    // public function showBookByAuthor(int $id){
-
-    //     $author= Author::find($id);
-    //     $books = Author::find($id)->books()->paginate(5);
-        
-    //     return view('front.author', ['books' => $books, 'author' => $author]);
-    // }
-
-    // public function showBookByGenre(int $id){
-    //     // on récupère le modèle genre.id 
-    //     $genre = Genre::find($id);
-    //     $books = $genre->books()->paginate(5);
-
-    //     return view('front.genre', ['books' => $books, 'genre' => $genre]);
-    // }
     
 }

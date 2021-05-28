@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable = [ 'name', 'description', 'price', 'status', 'reference', 'category_id' ];
+    protected $fillable = [ 'name', 'description', 'state', 'price', 'status', 'reference', 'category_id' ];
 
     // ici le setter va récupérer la valeur à insérer en base de données
     // nous pourrons alors vérifier sa valeur avant que le modèle n'insère la donnée en base de données

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:wght@600&display=swap);@charset "UTF-8";
 
 /*!
  * Bootstrap v3.4.1 (https://getbootstrap.com/)
@@ -8089,11 +8089,44 @@ button.close {
 }
 
 .resultTitle {
-  text-align: right
+  text-align: right;
+  margin-bottom: 20px;
 }
 
 .card-title {
   font-size: 20px;
+  margin-top: 0;
+}
+
+.card-price {
+  margin-bottom: 50px;
+  margin-top: 0;
+  font-size: 20px;
+  font-weight: bold;
+  width: 50%;
+  text-align: left;
+}
+
+.soloPrice {
+  margin-bottom: 50px;
+  margin-top: 0;
+  font-size: 20px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.oldPirce {
+  margin-top: 0;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: line-through;
+  width: 50%;
+  text-align: right;
+  margin-right: 15px;
+}
+
+.divPrices {
+  display: flex;
 }
 
 .row {
@@ -8110,7 +8143,7 @@ button.close {
 }
 
 .divContent {
-  min-height: 66vh;
+  min-height: 100vh;
 }
 
 .text-reset {

@@ -32,7 +32,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        // permet de récupérer une collection type array avec en clé id => name
+        $categories = Category::pluck('name', 'id')->all();
+        $sizes = Size::pluck('name', 'id')->all();
+
+        return view('back.product.create', ['categories' => $categories, 'sizes' => $sizes]);
     }
 
     /**
@@ -43,20 +47,25 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // On check si la requête valide le schéma de données
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|string|min:5|max:100',
             'description' => 'required|string',
-            'category_id' => 'integer',
+            'price' => 'required|string|min:0|not_in:0',
+            'reference' => 'required|string',
+            'category_id' => 'required|integer',
+            'state' => 'required|in:standard,solde',
+            'sizes'   => 'required|array',
             'sizes.*' => 'integer', // pour vérifier un tableau d'entiers il faut mettre authors.*
-            'status' => 'in:published,unpublished',
+            'status' => 'required|in:published,unpublished',
             'title_image' => 'string|nullable', // pour le titre de l'image si il existe
-            'picture' => 'image|max:3000',
+            'picture' => 'required|image|max:3000',
         ]);
 
         $product = Product::create($request->all()); // associé les fillables
 
         // On utilise le modèle product et la relation sizes ManyToMany pour attacher des/un nouveaux/nouvel auteur(s)
-        // à un livre que l'on vient de créer en base de données.
+        // à un produit que l'on vient de créer en base de données.
         // Attention $request->sizes correspond aux donnes du formulaire alors $product->sizes() à la relation ManyToMany
         $product->sizes()->attach($request->sizes);
 
@@ -113,12 +122,19 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // On check si la requête valide le schéma de données
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|string|min:5|max:100',
             'description' => 'required|string',
-            'category_id' => 'integer',
-            'sizes.*' => 'integer', // pour vérifier un tableau d'entiers il faut mettre sizes.*
-            'status' => 'in:published,unpublished'
+            'price' => 'required|string|min:0|not_in:0',
+            'reference' => 'required|string',
+            'category_id' => 'required|integer',
+            'state' => 'required|in:standard,solde',
+            'sizes'   => 'required|array',
+            'sizes.*' => 'integer', // pour vérifier un tableau d'entiers il faut mettre authors.*
+            'status' => 'required|in:published,unpublished',
+            'title_image' => 'string|nullable', // pour le titre de l'image si il existe
+            'picture' => 'image|max:3000',
         ]);
 
         $product = Product::find($id); // associé les fillables

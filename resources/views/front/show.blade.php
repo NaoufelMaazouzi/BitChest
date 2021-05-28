@@ -15,7 +15,7 @@
                 <label for="size">Taille :</label>
                 <select class="form-select" aria-label="Default select example">
                     <option selected>Choisissez une taille</option>
-                    @foreach(['XS', 'S', 'M', 'L', 'XL'] as $size)
+                    @foreach($product->sizes()->pluck('name')->all() as $size)
                         <option value="{{$size}}">{{$size}}</option>
                     @endforeach
                 </select>

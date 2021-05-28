@@ -78,8 +78,12 @@ module.exports = __webpack_require__(45);
 
 (function () {
 
-    $(".delete").on("submit", function () {
+    $(".deleteProduct").on("submit", function () {
         return confirm("Voulez-vous supprimer ce produit ?");
+    });
+
+    $(".deleteCategory").on("submit", function () {
+        return confirm("Voulez-vous supprimer cette gatégorie ?");
     });
 })($);
 
