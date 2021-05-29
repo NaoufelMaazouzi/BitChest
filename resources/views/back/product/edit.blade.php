@@ -42,7 +42,7 @@
                     <div class="input-radio">
                         <h3>Catégorie :</h3>
                             @foreach($category as $id => $name)
-                                <input type="radio" @if($product->category->id == $id) checked @endif name="category_id" value="{{$id}}"> {{$name}}<br>
+                                <input type="radio" @if($product->category !== null && $product->category->id == $id) checked @endif name="category_id" value="{{$id}}"> {{$name}}<br>
                             @endforeach
                         @if($errors->has('category_id')) <span class="error bg-warning text-warning">{{$errors->first('category_id')}}</span>@endif
                     </div>

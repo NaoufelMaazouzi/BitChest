@@ -16,7 +16,7 @@
     @forelse($products as $product)
         <tr>
             <td><a href="#">{{$product->name}}</a></td>
-            <td>{{$product->category->name}}</td>
+            <td>{{$product->category !== null ? $product->category->name : 'Aucune catégorie'}}</td>
             <td>{{$product->price}}€</td>
             <td>{{$product->state}}</td>
             <td><a href="{{route('products.edit', $product->id)}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>

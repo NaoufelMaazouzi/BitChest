@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id'); // clé primaire
             $table->unsignedInteger('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
             $table->string('name', 100); // VARCHAR 100
             $table->text('description'); // TEXT 
             $table->float('price', 8, 2); // FLOAT 
