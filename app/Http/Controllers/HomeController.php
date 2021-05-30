@@ -13,6 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        // Passe par le middleware d'authentification
         $this->middleware('auth');
     }
 
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // Redirige vers la vue home
         return view('home');
     }
 }

@@ -11,6 +11,7 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+        // On ajoute un user admin en base de données
         DB::table('users')->insert([
             [
                 'name' => 'admin',

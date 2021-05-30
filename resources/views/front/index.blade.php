@@ -1,5 +1,6 @@
 @extends('layouts.master')
 
+<!-- Vue pour afficher les produits -->
 @section('content')
 
 <h1 class="resultTitle">{{$products->total()}} résultats</h1>

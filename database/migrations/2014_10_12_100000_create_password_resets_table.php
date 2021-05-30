@@ -13,6 +13,7 @@ class CreatePasswordResetsTable extends Migration
      */
     public function up()
     {
+        // On crée le schéma pour la base de données
         Schema::create('password_resets', function (Blueprint $table) {
             $table->string('email')->index();
             $table->string('token');
@@ -27,6 +28,7 @@ class CreatePasswordResetsTable extends Migration
      */
     public function down()
     {
+        // Si la table password_resets on la supprime de la base de données
         Schema::dropIfExists('password_resets');
     }
 }

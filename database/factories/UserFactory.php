@@ -14,6 +14,7 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\User::class, function (Faker $faker) {
+    // Ici on crée des fausses données d'exemple en base de données grâce au module Faker
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,

@@ -1,5 +1,6 @@
 @extends('layouts.master')
 
+<!-- Vue pour afficher un produit en question -->
 @section('content')
 <article>
     <div class="col-md-12">

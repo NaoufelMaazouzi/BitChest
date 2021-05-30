@@ -1,10 +1,10 @@
 @extends('layouts.master')
 
+<!-- Vue pour modifier une catégorie -->
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                
                 <h1>Modifier la catégorie :  </h1>
                 <form action="{{route('categories.update', $category->id)}}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}

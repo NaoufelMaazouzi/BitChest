@@ -14,6 +14,8 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+    // Les fillable qui peuvent être modifiés/ajoutés
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -23,6 +25,8 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+    // Les attributs 'cachés'
     protected $hidden = [
         'password', 'remember_token',
     ];

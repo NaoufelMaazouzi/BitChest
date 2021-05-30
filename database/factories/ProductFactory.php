@@ -3,6 +3,7 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Product::class, function (Faker $faker) {
+    // Ici on crée des fausses données d'exemple en base de données grâce au module Faker
     return [
         'name' => $faker->sentence($nbWords = 3, $variableNbWords = false),
         'description' => $faker->sentence($nbWords = 6, $variableNbWords = true),

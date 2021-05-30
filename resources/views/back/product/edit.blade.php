@@ -1,5 +1,6 @@
 @extends('layouts.master')
 
+<!-- Vue pour modifier un produit -->
 @section('content')
     <div class="container">
         <div class="row">

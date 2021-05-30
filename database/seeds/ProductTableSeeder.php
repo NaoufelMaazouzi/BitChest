@@ -11,69 +11,53 @@ class ProductTableSeeder extends Seeder
      */
     public function run()
     {
+        // On crée les catégories Homme et Femme
         App\Category::create([
             'name' => 'Homme'
         ]);
         App\Category::create([
             'name' => 'Femme'
         ]);
-        App\Size::create([
-            'name' => 'XS'
-        ]);
-        App\Size::create([
-            'name' => 'S'
-        ]);
-        App\Size::create([
-            'name' => 'M'
-        ]);
-        App\Size::create([
-            'name' => 'L'
-        ]);
-        App\Size::create([
-            'name' => 'XL'
-        ]);
-        
 
+        // On crée les tailles
+        $sizeArray = array('XS', 'S', 'M', 'L', 'XL');
+        foreach($sizeArray as $key => $value) {
+            App\Size::create([
+                'name' => $value
+            ]);
+        };
+        
+        // On crée 80 prodduits
         factory(App\Product::class, 80)->create()
         ->each(function($product){
+
+            //On récupère une categorie globalement
             global $category;
             $category = App\Category::find(rand(1, 2));
 
-            // $pathHommes = public_path('images/Homme');
-            // $filesHommes = File::allFiles($pathHommes);
-            // $hommesPictures = array_map(function($file){ 
-            //     return substr($file, strrpos($file, '\\') + 1); 
-            // },
-            // $filesHommes);
-
-            // $pathFemmes = public_path('images/Femme');
-            // $filesFemmes = File::allFiles($pathFemmes);
-            // $femmesPictures = array_map(function($file){ 
-            //     return substr($file, strrpos($file, '\\') + 1); 
-            // },
-            // $filesFemmes);
-
+            //On récupère toutes les images dans le dossier images
             $path = public_path('images');
             $files = File::allFiles($path);
+            // On récupère seulement les images de la catégorie glabal
             $filteredArray = array_filter($files, function($elem){
                 global $category;
                 return str_contains($elem, $category->name);
             });
+            // On supprime tout ce qu'il y a avant le dernier anti-slash du lien
             $arrayPictures = array_map(function($file){
                 return substr($file, strrpos($file, '\\') + 1); 
             },
             $filteredArray);
 
-            // $link = array_rand($category->name == 'Homme' ? $hommesPictures : $femmesPictures, 1);
-            // $categoryName = $category->name;
             $index = array_rand($arrayPictures, 1);
 
+            //On crée l'image du proudit avec le lien qu'on a récupéré
             $product->picture()->create([
                 'title' => 'Default',
                 'link' => $arrayPictures[$index],
             ]);
             
-            // Storage::disk('local')->put($link, $file);
+            // On associe les tailles et catégorie au produit
             $sizes = App\Size::pluck('id')->shuffle()->slice(0, rand(1, 3))->all();
             $product->sizes()->attach($sizes);
             $product->category()->associate($category);

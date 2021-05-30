@@ -13,6 +13,7 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
+        // On crée le schéma pour la base de données
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id'); // clé primaire
             $table->unsignedInteger('category_id')->nullable();
@@ -34,6 +35,7 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
+        // Si la table categories on la supprime de la base de données
         Schema::dropIfExists('products');
     }
 }

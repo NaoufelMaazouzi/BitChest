@@ -20,12 +20,14 @@ class FrontController extends Controller
     public function index(){
         $products = Product::published()->paginate(6); // pagination 
 
+        // On redirige l'utilisateur vers la vue front index avec les produits récupérés
         return view('front.index', ['products' => $products]);
     }
 
     public function showProductSoldes(){
         $products = Product::solde()->paginate(6); // pagination 
 
+        // On redirige l'utilisateur vers la vue front index avec les produits récupérés
         return view('front.index', ['products' => $products]);
     }
 
@@ -34,13 +36,16 @@ class FrontController extends Controller
         $category = Category::find($id);
         $products = $category->products()->paginate(6);
 
+        // On redirige l'utilisateur vers la vue front index avec les produits et les catégories récupérés
         return view('front.index', ['products' => $products, 'category' => $category]);
     }
 
     public function show(int $id){
 
+        // On récupère le produit demandé
         $product = Product::find($id);
         
+        // On redirige l'utilisateur vers la vue front show avec le produit récupérés
         return view('front.show', ['product' => $product]);
     }
     

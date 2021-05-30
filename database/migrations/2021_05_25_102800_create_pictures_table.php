@@ -13,6 +13,7 @@ class CreatePicturesTable extends Migration
      */
     public function up()
     {
+        // On crée le schéma pour la base de données
         Schema::create('pictures', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('product_id');
@@ -30,6 +31,7 @@ class CreatePicturesTable extends Migration
      */
     public function down()
     {
+        // Si la table pictures on la supprime de la base de données
         Schema::dropIfExists('pictures');
     }
 }

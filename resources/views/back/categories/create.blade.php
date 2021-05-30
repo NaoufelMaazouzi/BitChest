@@ -1,5 +1,6 @@
 @extends('layouts.master')
 
+<!-- Vue pour créer une catégorie -->
 @section('content')
     <div class="container">
         <div class="row">
@@ -17,7 +18,7 @@
                     </div>
                     <div class="col-md-6">
                         <button type="submit" class="btn btn-primary">Ajouter un produit</button>
-                    </div><!-- #end col md 6 -->
+                    </div>
                 </form>
             </div>
         </div>

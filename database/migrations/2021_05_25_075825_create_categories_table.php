@@ -13,6 +13,7 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
+        // On crée le schéma pour la base de données
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100);
@@ -28,6 +29,7 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
+        // Si la table categories on la supprime de la base de données
         Schema::dropIfExists('categories');
     }
 }

@@ -1,5 +1,6 @@
 @extends('layouts.master')
 
+<!-- Vue pour afficher les catégorie -->
 @section('content')
 <p class="newBtn"><a href="{{route('categories.create')}}"><button type="button" class="btn btn-primary btn-lg">Nouveau</button></a></p>
 {{-- On inclut le fichier des messages retournés par les actions du contrôleurs productController--}}

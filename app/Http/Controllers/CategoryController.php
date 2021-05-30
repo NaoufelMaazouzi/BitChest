@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    // Pagination de 15 catégories
     protected $paginate = 15;
     /**
      * Display a listing of the resource.
@@ -18,6 +19,7 @@ class CategoryController extends Controller
         // On récupère les catégories et on les envoient vers le front
         $categories = Category::paginate($this->paginate);
 
+        //On redirige l'utilisateur vers la vue catégories index avec les catégories récupérées
         return view('back.categories.index', ['categories' => $categories]);
     }
 
