@@ -12,16 +12,6 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-// Route::get('products', 'ProductController@index');
-// Route::get('/userLoggedIn', function (Request $request) {
-//     var_dump(Auth::user());
-//     if (Auth::check()) {
-//         return 'okkk';
-//     } else {
-//         return 'noon';
-//     }
-// });
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -37,12 +27,3 @@ Route::patch('user/{id}', 'UserController@update')->where(['id' => '[0-9]+']);
 Route::group(['middleware' => ['auth', 'admin']], function() {
     Route::resource('/admin/users', 'UserController');
   });
-  
-
-
-
-// Route::group(['middleware' => 'auth:api'], function()
-// {
-    // Route::resource('/admin/users', 'UserController');
-// });
-// Route::middleware('auth:api')->resource('/admin/users', 'UserController');
