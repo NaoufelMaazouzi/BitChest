@@ -11,9 +11,5 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .js('resources/assets/js/confirm.js', 'public/js') // ajouter un fichier à compiler
-   .sass('resources/assets/sass/app.scss', 'public/css')
-   .browserSync({
-      proxy: 'localhost:8000'
-  });
+mix.react('resources/assets/js/app.js', 'public/js')
+   .sass('resources/assets/sass/app.scss', 'public/css');
